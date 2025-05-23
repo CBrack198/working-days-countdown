@@ -25,7 +25,7 @@
       text-align: center;
     }
     h1 {
-      font-size: 1.4rem; /* slightly larger */
+      font-size: 1.4rem;
       font-weight: 600;
       margin-bottom: 1rem;
       color: #444;
@@ -52,17 +52,25 @@
   <script>
     const endDate = new Date("2025-09-26");
     const today = new Date();
-    const timeDiff = endDate - today;
+    let totalDays = 0;
 
-    if (timeDiff < 0) {
-      document.getElementById("days-left").textContent = "Done!";
-    } else {
-      const weeksLeft = timeDiff / (1000 * 60 * 60 * 24 * 7);
-      const workingDaysLeft = (weeksLeft * 2.5).toFixed(1);
-      document.getElementById("days-left").textContent = workingDaysLeft;
+    const date = new Date(today);
+    date.setHours(0, 0, 0, 0); // normalize
+
+    while (date <= endDate) {
+      const day = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+      if (day === 1 || day === 5) {
+        totalDays += 1; // full day for Monday or Friday
+      } else if (day === 4) {
+        totalDays += 0.5; // half day for Thursday
+      }
+      date.setDate(date.getDate() + 1); // next day
     }
+
+    document.getElementById("days-left").textContent = Math.round(totalDays);
   </script>
 </body>
 </html>
+
 
 
