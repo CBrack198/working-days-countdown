@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Working Days Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    .count {
+      font-size: 3rem;
+      margin: 20px 0;
+      color: #007acc;
+    }
+    .label {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⏳ Project Countdown</h1>
+    <div class="count" id="days-left">Loading...</div>
+    <div class="label">Working days left until <strong>Sep 26, 2025</strong></div>
+  </div>
+
+  <script>
+    const endDate = new Date("2025-09-26");
+    const today = new Date();
+    const timeDiff = endDate - today;
+
+    if (timeDiff < 0) {
+      document.getElementById("days-left").textContent = "✅ Done!";
+    } else {
+      const weeksLeft = timeDiff / (1000 * 60 * 60 * 24 * 7);
+      const workingDaysLeft = (weeksLeft * 2.5).toFixed(1);
+      document.getElementById("days-left").textContent = workingDaysLeft;
+    }
+  </script>
+</body>
+</html>
